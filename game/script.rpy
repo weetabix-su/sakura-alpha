@@ -1,3 +1,4 @@
+#WEETABIX INITIALS AND MENU-ISH DATA
 init:    
     image weet cred = "weet/portcred.jpg"
     image e amazora02 = "e/amazora02.jpg"
@@ -125,6 +126,7 @@ init:
     image e yakkyoku = "e/yakkyoku.jpg"
     image e yuki_kohan = "e/yuki_kohan.jpg"
     image e yukizora = "e/yukizora.jpg"
+    image sys mini_title = "sys/mini_title.jpg"
     image tui2 c044 = "tui2/c044.jpg"
     image tui2 c044_h = "tui2/c044_h.jpg"
     image tui2 c045 = "tui2/c045.jpg"
@@ -157,23 +159,120 @@ init:
     image yobi cat07 = "yobi/cat07.jpg"
     image yobi cat09 = "yobi/cat09.jpg"
     image yobi cat09_h = "yobi/cat09_h.jpg"
-#	define se = Character('Setsumi')
-#	define w = Character('???')
 label start:
-    "Note: The English Version of 'Narcissu' contains two different translations: One from the voiced version (by Seung Park, a.k.a. gp32); One from the unvoiced version (by Peter Jolly, a.k.a. Haeleth)."
+    $gameStart = false
+    "Note: [Narcissu] contains voice data." "" "Turn on voice data?"
+    menu:
+		"Yes":
+			$voc = true
+			"DISCLAIMER: The voice data may interfere with the performance of the RenPSP Visual Novel engine." "" "Press X to Continue"
+			jump minititle
+		"No":
+			$voc = false
+			jump minititle
+label minititle:
+    if gameStart == false:
+        scene sys mini_title
+        play music "tui/sen032.ogg"
+        "Written by Tomo Kataoka" "[stage-nana] Volume 24"
+        jump warn
+    if gameStart == true:
+        scene sys mini_title
+        if ver == 1:
+            if gp32Char == 0:
+                scene e w
+                "Chapter 1:" "7F" "" "Press X to continue."
+                jump GP_honpen2
+            elif gp32Char == 1:
+                "Chapter 2:" "The Silver Coupe" "" "Press X to continue."
+                jump GP_honpen3
+            elif gp32Char == 2:
+                "Chapter 3:" "Map" "" "Press X to continue."
+                jump GP_honpen4
+            elif gp32Char == 3:
+                "Chapter 4:" "The Emerald Sea" "" "Press X to continue."
+                jump GP_honpen5
+            elif gp32Char == 4:
+                "Chapter 5:" "#1 Route" "" "Press X to continue."
+                jump GP_honpen6
+            elif gp32Char == 5:
+                "Chapter 6:" "Echo" "" "Press X to continue."
+                jump GP_honpen7
+            elif gp32Char == 6:
+                "Chapter 7:" "Narcissu" "" "Press X to continue."
+                jump GP_honpen8
+            elif gp32Char == 7:
+                "Chapter 8:" "Shiraishi Construction" "" "Press X to continue."
+                jump GP_honpen9
+        elif ver == 2:
+            if haeChar == 0:
+                scene e w
+                "Chapter 1:" "The Seventh Floor" "" "Press X to continue."
+                jump HAE_honpen2
+            elif haeChar == 1:
+                "Chapter 2:" "The Silver Coupe" "" "Press X to continue."
+                jump HAE_honpen3
+            elif haeChar == 2:
+                "Chapter 3:" "Maps" "" "Press X to continue."
+                jump HAE_honpen4
+            elif haeChar == 3:
+                "Chapter 4:" "The Emerald Sea" "" "Press X to continue."
+                jump HAE_honpen5
+            elif haeChar == 4:
+                "Chapter 5:" "Route One" "" "Press X to continue."
+                jump HAE_honpen6
+            elif haeChar == 5:
+                "Chapter 6:" "Echo" "" "Press X to continue."
+                jump HAE_honpen7
+            elif haeChar == 6:
+                "Chapter 7:" "Narcissus" "" "Press X to continue."
+                jump HAE_honpen8
+            elif haeChar == 7:
+                "Chapter 8:" "Shiraishi Construction" "" "Press X to continue."
+                jump HAE_honpen9
+label warn:
+	play music "bgm/blank.ogg"
+    scene black
+    $gp32Char = 0
+    $haeChar = 0
+    $agiChar = 0
+    $persistent.gp32Char = 0
+    $persistent.haeChar = 0
+    $persistent.agiChar = 0
+    $persistent.gp32ON= false
+    $persistent.haeON = false
+    $persistent.agiON = false
+    $ver = 0
+    "Note: The English Version of 'Narcissu' contains three different versions from the following translators: Seung Park (gp32), Peter Jolly (Haeleth), and Randy Au (Agilis)"
     "Select a version which you most prefer."
     menu:
         "gp32":
             $renpy.block_rollback()
-            "DISCLAIMER: The character vocals may interfere with the performance of the RenPSP Visual Novel engine." "Press X to Continue"
             scene weet cred
             $renpy.pause(2)
+            $gameStart = true
+            $ver = 1
+            $persistent.gp32ON = true
             jump GP_prologue
         "Haeleth":
             $renpy.block_rollback()
+            "Sidenote: Voice data has not been added to this version yet." "" "Press X to Continue"
             scene weet cred
             $renpy.pause(2)
+            $gameStart = true
+            $ver = 2
+            $persistent.haeON = true
             jump HAE_prologue
+        "Agilis":
+			$renpy.block_rollback()
+			scene weet cred
+            $renpy.pause(2)
+            $gameStart = true
+			$ver = 3
+			scene sys mini_title
+            "The Agilis version of [Narcissu] han not been added to the game's script yet. For updates, please check https://github.com/weetabix-su/sakura-alpha or contact [weetabix] via e-mail (vovo27_miranemiko@yahoo.co.jp) or Twitter (@weetabix_su). Thank you." "" "Press X to Quit"
+            jump quit
+#PROLOGUE
 label GP_prologue:
     scene e b
     $renpy.pause(1)
@@ -184,14 +283,20 @@ label GP_prologue:
     scene e c003
     $renpy.pause(0.7)
     scene e c004
-    play sound "w/n001.wav"
+    if voc == true:
+		play sound "w/n001.wav"
+	else:
+		pass
     "... on a blindingly bright day ..." "... on that very day of winter ..."
     play sound "se/rain_1.wav"
     scene e c02
     "- Spring 1996 : Setsumi -"
     play music "bgm/n04.ogg"
     scene e sora_ame01
-    play sound "w/n002.wav"
+    if voc == true:
+		play sound "w/n002.wav"
+	else:
+		pass
     "(... true, I wasn't very healthy ever since I was a child ...)"
     "Even so, I attended elementary school like all the others," "and during summer breaks I often played until I was utterly tanned."
     scene e byoin_heya_yu2
@@ -212,23 +317,41 @@ label GP_prologue:
     "... and then into strangers."
     "As if with every changing of seasons," "I was being erased from their collective memory."
     scene e chara_k01
-    play sound "w/n003.wav"
+    if voc == true:
+		play sound "w/n003.wav"
+	else:
+		pass
     "\"... it seems that to all those normal people ...\""
     $renpy.pause(0.3)
-    play sound "w/n004.wav"
+    if voc == true:
+		play sound "w/n004.wav"
+	else:
+		pass
     "\"... my very existence was an 'unpleasant' fact.\""
-    play sound "w/n005.wav"
+    if voc == true:
+		play sound "w/n005.wav"
+	else:
+		pass
     "\"And so ... it looks like I've been erased ...\""
     play sound "se/rain_1.wav"
     scene e w
     $renpy.pause(0.4)
     scene e sora_ame03
-    play sound "w/n006.wav"
+    if voc == true:
+		play sound "w/n006.wav"
+	else:
+		pass
     "\"I'd spent so many seasons, so many white overcast skies ..." " without the want or need to converse with anybody ...\""
-    play sound "w/n007.wav"
+    if voc == true:
+		play sound "w/n007.wav"
+	else:
+		pass
     "\"For that matter, my English textbook never changed from that" " of a 1st-year middle school student before the first midterms.\""
     scene e chara_0012
-    play sound "w/n008.wav"
+    if voc == true:
+		play sound "w/n008.wav"
+	else:
+		pass
     "\"... that is where ..."
     "\"... that is where ... my time seems to come to an end.\""
     scene e chara_0013b
@@ -286,7 +409,7 @@ label GP_prologue:
     "I once again found myself in the hospital, as per usual."
     "Of course, it wasn't as if I'd been there the entire time." "I came and went, came and went. A futile cycle."
     "My first surgery was a month before. After that, I started" "doing the 5-minute commute to and from the hospital by moped."
-    "And from then on, I was hospitalized, discharged, ordered to clinic," "and hospitalized again and again and again ..."
+    "And from then on, I was hospitalized, discharged, ordered to clinic, and hospitalized again and again and again ..."
     "While I still had no clue what 'PET' or 'Iressa' stood for," "in no time at all, several months had already passed."
     "As my appetite decreased, my medications increased." "I could feel my own physical strength atrophying away."
     "I kept imagining that my legs were getting thinner,"
@@ -294,7 +417,7 @@ label GP_prologue:
     "And yet I ..."
     "And yet I ... kept looking on at myself with detached interest."
     "As if it were happening to somebody else entirely," "as if I were looking at a scene on TV or the like."
-    "My mind could not grasp what had so suddenly happened to my body." "Nothing within me was telling me that this was real at all."
+    "My mind could not grasp what had so suddenly happened to my body. Nothing within me was telling me that this was real at all."
     "And that's why, even though it was all happening to me," "I kept looking on as if it were happening to someone far away."
     scene e c033
     ""
@@ -315,7 +438,7 @@ label GP_prologue:
     scene e w
     "And surrounded by a trio of stilted, strained smiles ..." "" "I kept that thought, as if it were someone else's business," "with dispassion, ambiguity, and total disinterest."
     scene e c032
-    "- Protagonist: January 2005 -"
+    "- Protagonist: January 2005 -"
     scene e byoin_rouka
     "A new year began, and I returned to the hospital."
     "But on this day, instead of my usual 4F room," "I ended up in a conference room of sorts. They took me there."
@@ -337,7 +460,7 @@ label GP_prologue:
     "... but the windows only opened a little."
     "I tested them out," "and my head would just barely fit out of one."
     "The color of my ID bracelet had changed as well."
-    "The bracelet that I had worn ever since that first hospitalization," "the one that had my name and blood type recorded on it."
+    "The bracelet that I had worn ever since that first hospitalization, the one that had my name and blood type recorded on it."
     "Its color had now changed from blue to white."
     scene e b
     "A high ceiling. A white vinyl bracelet." "A window that would not open more than 15 cm."
@@ -349,7 +472,7 @@ label GP_prologue:
     scene e nar01
     ""
     scene e w
-    jump GP_honpen2
+    jump minititle
 label HAE_prologue:
     scene e b
     $renpy.pause(1)
@@ -516,11 +639,15 @@ label HAE_prologue:
     scene e nar01
     ""
     scene e w
-    jump HAE_honpen2
+    jump minititle
+#CHAPTER 1
 label GP_honpen2:
     scene e b
     $renpy.pause(0.8)
-    play sound "w/n010.wav"
+    if voc == true:
+		play sound "w/n010.wav"
+	else:
+		pass
     scene e c04
     ""
     play music "bgm/n04.ogg"
@@ -535,7 +662,10 @@ label GP_honpen2:
     scene e b
     "\"Hey ... do you find that interesting?\""
     "There was no deep purpose in the asking. Simply:" "I had nothing else to do, so I started talking to her."
-    play sound "w/nv011b.wav"
+    if voc == true:
+		play sound "w/nv011b.wav"
+	else:
+		pass
     "\"Not really ...\""
     "... was her only reply to me." "She didn't turn to face me at all."
     "And she kept looking on with boredom at that TV" "as if I didn't even exist."
@@ -549,27 +679,48 @@ label GP_honpen2:
     "New Year celebration programs, as per usual." "A useless array of comedians and oddities."
     "And every so often, the M.C.'s stupid, shrill laughter," "resounding dryly in this white, sun-drenched lounge."
     scene e danwa
-    play sound "w/nv012.wav"
+    if voc == true:
+		play sound "w/nv012.wav"
+	else:
+		pass
     "\"Say ... tell me ...\""
     "The girl suddenly started talking to me." "But her eyes were as always glued to the TV screen."
-    play sound "w/nv013.wav"
+    if voc == true:
+		play sound "w/nv013.wav"
+	else:
+		pass
     "\"... how many times is it for you now?\""
     "\"... what do you mean by that?\""
-    play sound "w/nv014.wav"
+    if voc == true:
+		play sound "w/nv014.wav"
+	else:
+		pass
     "\"How many times have you come here ... to 7F?\""
     "\"Sorry, I have no clue what you're talking about.\""
-    play sound "w/nv016.wav"
+    if voc == true:
+		play sound "w/nv016.wav"
+	else:
+		pass
     "\"I see ... so it's your first time, then.\""
     "So she'd seen my confusion about her question" "and come to the right conclusion."
-    play sound "w/nv017.wav"
-    "\"Then since there's no one else around ...\"" "... and since it's my duty ...\""
+    if voc == true:
+		play sound "w/nv017.wav"
+	else:
+		pass
+    "\"Then since there's no one else around ..." "... and since it's my duty ...\""
     "\"... duty?\""
-    play sound "w/nv018.wav"
+    if voc == true:
+		play sound "w/nv018.wav"
+	else:
+		pass
     "\"There's this rule ...\""
     "Nodding slightly, she explained that the rule was" "that someone here (7F) should tell newcomers the truth."
     "I knew nothing. I understood even less."
     "And as if I did not even exist," "she slowly started her speech."
-    play sound "w/nv019.wav"
+    if voc == true:
+		play sound "w/nv019.wav"
+	else:
+		pass
     "\"Then listen closely ...\""
     scene e b
     "... ..."
@@ -582,10 +733,16 @@ label GP_honpen2:
     "This was just a place" "where you waited for your life to come to an end."
     "Those were her words to me." "I'd thought so as well. I'd felt it even before she'd spoken."
     scene e danwa
-    play sound "w/nv020.wav"
+    if voc == true:
+		play sound "w/nv020.wav"
+	else:
+		pass
     "\"See, this is my second time ...\""
     "\"Second time doing what?\""
-    play sound "w/nv021b_a.wav"
+    if voc == true:
+		play sound "w/nv021b_a.wav"
+	else:
+		pass
     "\"... coming here.\""
     "And then she explained to me."
     "That nobody on 7F stayed here" "from initial hospitalization all the way until death."
@@ -594,9 +751,15 @@ label GP_honpen2:
     "... that cycle ended only in death."
     "Whether it was at home or here on 7F, always one of the two," "you were going to die. No way to escape it, it seemed."
     "And with that meaning permeating her every word," "she informed me that this was her second time up here."
-    play sound "w/nv021.wav"
+    if voc == true:
+		play sound "w/nv021.wav"
+	else:
+		pass
     "\"I'm only going to say this once ...\""
-    play sound "w/nv022.wav"
+    if voc == true:
+		play sound "w/nv022.wav"
+	else:
+		pass
     "\"... so listen closely now ...\""
     scene e b
     "... she continued speaking," "all the while staring at the blank TV screen."
@@ -610,12 +773,21 @@ label GP_honpen2:
     "... relevant only to those who were going to die ..." "... and kept by those who came here for that purpose."
     scene e danwa
     "\"So is *this* the duty that you were talking about?\""
-    play sound "w/nv023.wav"
+    if voc == true:
+		play sound "w/nv023.wav"
+	else:
+		pass
     "\"Yes, that's right ...\""
-    play sound "w/nv024.wav"
+    if voc == true:
+		play sound "w/nv024.wav"
+	else:
+		pass
     "\"So do remember to perform it" "for a newcomer yourself someday, okay ...?\""
     "With those words, she slowly stood up." "She casually tossed her long hair, and it grazed my nose."
-    play sound "w/nv025.wav"
+    if voc == true:
+		play sound "w/nv025.wav"
+	else:
+		pass
     "\"I have to go get my temperature measured, so ...\""
     scene e b
     "Then she turned her back," "and started walking down the corridor."
@@ -625,27 +797,39 @@ label GP_honpen2:
     $renpy.pause(2)
     play music "bgm/blank.ogg"
     scene e c042
-    $renpy.pause(0.4)
+    ""
     scene e sora01
     "A few days later."
     play music "tui2/e01.ogg"
-    "New year celebrations were over," "and the middle and high school students were beginning a new term."
+    "New year celebrations were over, and the middle and high school students were beginning a new term."
     "And just as ever, she and I sat in this lounge," "staring blankly at the TV."
     scene e danwa
     "\"This is boring ...\""
-    play sound "w/n026.wav"
+    if voc == true:
+		play sound "w/n026.wav"
+	else:
+		pass
     "\"So it is ...\""
     "So we said," "but both of us kept our eyes on the screen."
     "\"Hey, is this place always this way?\""
-    play sound "w/n027.wav"
+    if voc == true:
+		play sound "w/n027.wav"
+	else:
+		pass
     "\"... I don't understand what you're getting at.\""
     "\"I'm getting at how it's always deserted.\""
     "Other than the nurses, doctors, and helpstaff," "and other than *her*, I'd not seen a single person."
     "\"Did everybody go home for the new year or something?\""
-    play sound "w/n028.wav"
+    if voc == true:
+		play sound "w/n028.wav"
+	else:
+		pass
     "\"... do you really want to know?\""
     "\"Uh, well ... I didn't mean ...\""
-    play sound "w/n029.wav"
+    if voc == true:
+		play sound "w/n029.wav"
+	else:
+		pass
     "\"... then I won't tell you.\""
     "We, who disinterestedly tossed back and forth" "this exchange that could not even be called a conversation."
     "The slight breeze," "coming from the window that would not open more than 15 cm."
@@ -658,15 +842,24 @@ label GP_honpen2:
     "An elderly nurse said as she rushed toward us."
     "From what I'd seen of the nurses' station," "she was apparently the charge nurse of 7F."
     "\"Well?  Miss Setsumi, any fever?\""
-    play sound "w/n030.wav"
+    if voc == true:
+		play sound "w/n030.wav"
+	else:
+		pass
     "\"... I'm fine, no fever ...\""
     "... Setsumi."
     "... Setsumi." "" "So that was her name."
     "\"You really shouldn't be moving around like this.\""
-    play sound "w/n033.wav"
+    if voc == true:
+		play sound "w/n033.wav"
+	else:
+		pass
     "\"... ... ...\""
     "\"Do you understand?  Everyone's worried about you.\""
-    play sound "w/n032.wav"
+    if voc == true:
+		play sound "w/n032.wav"
+	else:
+		pass
     "\"... well, whatever ...\""
     "\"Come now, what kind of answer is that?\""
     "\"Oh, children these days ...\""
@@ -679,28 +872,49 @@ label GP_honpen2:
     "\"Hey, you know ...\""
     "\"Well ... mind if I call you Setsumi?\""
     "I asked this as I stared at her white vinyl ID bracelet," "and at the blood type and the name written therein."
-    play sound "w/n055.wav"
+    if voc == true:
+		play sound "w/n055.wav"
+	else:
+		pass
     "\"... ... ...\""
     "\"Is something the matter? Setsumi?\""
-    play sound "w/n035.wav"
+    if voc == true:
+		play sound "w/n035.wav"
+	else:
+		pass
     "\"... why are you calling me that?\""
     "\"Huh?\""
-    play sound "w/n036.wav"
+    if voc == true:
+		play sound "w/n036.wav"
+	else:
+		pass
     "\"You're younger than me ...\""
     "\"H-hey, why am I younger than you?\""
-    play sound "w/n037.wav"
+    if voc == true:
+		play sound "w/n037.wav"
+	else:
+		pass
     "\"Nothing ... that's just what I thought, is all.\""
     "It wasn't that I was offended" "that she called me \"younger\" than her."
     "It was just that no matter how I looked at it," "I thought I was 5-6 years older than she was."
     "That's why I took out my driver's license from my breast pocket" "and handed it directly to her."
     "\"See? I may not seem it, but I'm 20.\""
-    play sound "w/n055.wav"
+    if voc == true:
+		play sound "w/n055.wav"
+	else:
+		pass
     "\"... ... ...\""
-    play sound "w/n039.wav"
+    if voc == true:
+		play sound "w/n039.wav"
+	else:
+		pass
     "\"So you're younger after all ...\""
     "She only took a glance at my license before handing it back to me."
     "\"Um, I don't really get what you're saying.\""
-    play sound "w/n040_1.wav"
+    if voc == true:
+		play sound "w/n040_1.wav"
+	else:
+		pass
     "\"It doesn't really matter ..." "I'm just a little older than you are, that's all.\""
     "She murmured, as expressionlessly as ever."
     "Her eyes were fixed on that boring TV, all right," "but it also felt as if she was gazing at something far away ..."
@@ -745,73 +959,124 @@ label GP_honpen2:
     "That was where I found her."
     scene e danwa_yoru
     "\"Hey.  Have you been looking outside today?\""
-    play sound "w/nv044.wav"
+    if voc == true:
+		play sound "w/nv044.wav"
+	else:
+		pass
     "\"... yeah.\""
     "The darkened interior. She did answer me," "but she continued to stare out the window as if she had not."
     "I immediately launched into what had happened today."
     "\"Oh, by the way ... I went out to the station today.\""
     "\"The B station, just as you taught me.\""
-    play sound "w/nv079.wav"
+    if voc == true:
+		play sound "w/nv079.wav"
+	else:
+		pass
     "\"I see ...\""
     "But her response did not change."
     "I'd thought that she'd react with *something*" "because she'd been there before too ..."
     "But now that I thought about it, did the fact that she was here"
     "But now that I thought about it, did the fact that she was here" "" "mean that she had no intention of escaping in the first place?"
-    play sound "w/nv047.wav"
+    if voc == true:
+		play sound "w/nv047.wav"
+	else:
+		pass
     "\"... I'm going to be going home soon ...\""
     "\"What?\""
     "She opened her mouth abruptly."
     "And spoke as if she'd seen" "right through me."
-    play sound "w/nv048b.wav"
+    if voc == true:
+		play sound "w/nv048b.wav"
+	else:
+		pass
     "\"... but next time will be the third time ...\""
-    play sound "w/nv048_1c.wav"
+    if voc == true:
+		play sound "w/nv048_1c.wav"
+	else:
+		pass
     "\"... so we may not see each other again.\""
     "\"Hmm ... yeah, I guess ...\""
     "Probably, what she was talking about" "was a temporary discharge from the hospital."
     "She'd told me that nobody was discharged from 7F" "more than 3 times."
     "Unlike the elderly, given the progress of our diseases," "this meant all the more to young people like us."
     "Her 'we may not see each other again'" "was filled with that kind of meaning."
-    play sound "w/nv049.wav"
+    if voc == true:
+		play sound "w/nv049.wav"
+	else:
+		pass
     "\"Oh, which one have you decided on?\""
     "\"... decided on?\""
-    play sound "w/nv049_1b.wav"
+    if voc == true:
+		play sound "w/nv049_1b.wav"
+	else:
+		pass
     "\"... where you're going to die.\""
     "\"... ...\""
     "When that word, 'death', came up so abruptly," "I was at a total loss for words."
     "\"I don't know ... haven't thought about it yet.\""
-    play sound "w/nv050.wav"
+    if voc == true:
+		play sound "w/nv050.wav"
+	else:
+		pass
     "\"... I see ... it's just your first time, after all.\""
     "She murmured, looking desolate."
     "Certainly, it wasn't as if" "I was going to exist here forever."
     "Just like everyone else, I would be admitted and discharged," "slowly grow weak, and someday ..."
     "I would have to choose in the end: here on 7F," "or at home surrounded by those fake smiles."
-    play sound "w/nv051.wav"
+    if voc == true:
+		play sound "w/nv051.wav"
+	else:
+		pass
     "\"I ... don't want to die at home ...\""
     $renpy.pause(0.5)
-    play sound "w/nv052.wav"
+    if voc == true:
+		play sound "w/nv052.wav"
+	else:
+		pass
     "\"But I don't want to die here either ...\""
     "\"... then what will you do?\""
-    play sound "w/n055.wav"
+    if voc == true:
+		play sound "w/n055.wav"
+	else:
+		pass
     "\"... ... ...\""
-    play sound "w/nv053.wav"
+    if voc == true:
+		play sound "w/nv053.wav"
+	else:
+		pass
     "\"... I guess ... the only thing ...\""
     $renpy.pause(0.5)
-    play sound "w/nv054b.wav"
+    if voc == true:
+		play sound "w/nv054b.wav"
+	else:
+		pass
     "\"... is to go somewhere ..." "... while I still have the strength to ...\""
     "\"Somewhere? You can't be ...\""
     "This girl, who was staying here on 7F" "when she could have escaped anytime she wanted ..."
     "When I thought of that ..."
     "\"... do you have any other place *to* go?\""
-    play sound "w/n055.wav"
+    if voc == true:
+		play sound "w/n055.wav"
+	else:
+		pass
     "\"... ... ...\""
-    play sound "w/nv056.wav"
+    if voc == true:
+		play sound "w/nv056.wav"
+	else:
+		pass
     "\"Do you ..."
     "\"Do you ..." "want to stop me?\""
     "\"Wha ...\""
-    play sound "w/nv057.wav"
+    if voc == true:
+		play sound "w/nv057.wav"
+	else:
+		pass
     "\"Or ... do you want to come with me?\""
     "\"Well, no, that wasn't what I was thinking about ...\""
-    play sound "w/nv059.wav"
+    if voc == true:
+		play sound "w/nv059.wav"
+	else:
+		pass
     "\"... then don't ask.\""
     "She was staring out the window as she spoke. Dispassionate." "Not looking at me once. The same as ever."
     "But then and just then ..."
@@ -831,7 +1096,10 @@ label GP_honpen2:
     play music "bgm/n03.ogg"
     scene e danwa_ame
     "And I was sitting there watching TV in my usual place." "7F felt as devoid of people as it always had."
-    play sound "w/n061.wav"
+    if voc == true:
+		play sound "w/n061.wav"
+	else:
+		pass
     "\"... anything interesting?\""
     "\"No, completely boring ...\""
     "She walked to my side."
@@ -840,11 +1108,17 @@ label GP_honpen2:
     "... she was probably in the same boat as me."
     "Nothing else to do. Nothing we *could* do."
     scene e b
-    play sound "w/n062.wav"
+    if voc == true:
+		play sound "w/n062.wav"
+	else:
+		pass
     "\"Oh ...\""
     "I had never seen her" "respond to the TV before."
     "\"Is something the matter?\""
-    play sound "w/n063.wav"
+    if voc == true:
+		play sound "w/n063.wav"
+	else:
+		pass
     "\"... not really.\""
     "Those were her usual words," "but her response was anything but usual."
     "And I looked at the screen," "interested in anything that could move her so."
@@ -855,14 +1129,23 @@ label GP_honpen2:
     "... I remembered those flowers from somewhere."
     "They looked very similar to the white flowers" "that decorated the windowsills."
     "\"Could those be the same flowers ...?\""
-    play sound "w/n064.wav"
+    if voc == true:
+		play sound "w/n064.wav"
+	else:
+		pass
     "\"... ...\""
     "\"You know, the same as those over there.\""
     "I pointed to the flowers by the window as I said this."
-    play sound "w/n065.wav"
+    if voc == true:
+		play sound "w/n065.wav"
+	else:
+		pass
     "\"... no.\""
     "\"Huh, really?\""
-    play sound "w/n066.wav"
+    if voc == true:
+		play sound "w/n066.wav"
+	else:
+		pass
     "\"They're of the same variety ..." "but they're not strictly the same ...\""
     "She glanced at the flowers by the window for a second," "and then went back to gazing at the TV."
     "She'd told me that they were different," "but I couldn't see the distinction between the two."
@@ -871,16 +1154,25 @@ label GP_honpen2:
     "She was conversing in rare form today." "Which was why I decided to follow along."
     scene e danwa_ame
     "\"Do you happen to know a lot about them?" "Flowers, that is.\""
-    play sound "w/n068.wav"
+    if voc == true:
+		play sound "w/n068.wav"
+	else:
+		pass
     "\"... not really.\""
     "\"Really?  But I don't see the difference.\""
     "The flowers on the screen." "And the flowers in the vase to her side."
     "I continued to talk as I stared vacantly at the two."
     "\"Look, look, are these orchids or lilies?\""
-    play sound "w/n067.wav"
+    if voc == true:
+		play sound "w/n067.wav"
+	else:
+		pass
     "\"... ... ...\""
     "\"See, they're pure white, right?\""
-    play sound "w/n067.wav"
+    if voc == true:
+		play sound "w/n067.wav"
+	else:
+		pass
     "\"... ... ...\""
     scene e b
     "I had no interest," "yet I kept trying to make conversation."
@@ -889,10 +1181,16 @@ label GP_honpen2:
     "And with her usual lack of expression," "she continued staring at the boring TV screen."
     "And just when I turned back to the TV," "resigned to the fact that I'd get nothing more out of her ..."
     scene e w
-    play sound "w/n069.wav"
+    if voc == true:
+		play sound "w/n069.wav"
+	else:
+		pass
     "\"... narcissus ...\""
     "\"Wha ...?\""
-    play sound "w/n070.wav"
+    if voc == true:
+		play sound "w/n070.wav"
+	else:
+		pass
     "\"Those are narcissus ...\""
     scene e chara_0013
     $renpy.pause(0.4)
@@ -904,6 +1202,351 @@ label GP_honpen2:
     "And I swore I could see a tiny smile ..."
     "... on that face that was looking at me for the first time."
     scene e w
+    $renpy.pause(0.4)
     play sound "bgm/blank.ogg"
+    if persistent.gp32Char < 1:
+		$persistent.gp32Char = 1
+	else:
+		pass
+	$gp32Char = gp32Char + 1
+	jump minititle
+label HAE_honpen2:
+	scene e b
+    $renpy.pause(0.8)
+    scene e c04_h
+    ""
+    play music "bgm/n04.ogg"
+    scene e byoin7_rouka
+    "If you go down the corridor past the nurse's station, you'll come to a lounge area off to one side."
+    scene e danwa
+    "The place was usually empty apart from the furniture, which when I was there consisted of a number of sofas and pipe chairs, and one TV."
+    "It wasn't a particularly impressive one (only a 28\" CRT), and at that time of year all it was showing was boring festive specials."
+    "She was watching it without the slightest sign of interest."
+    "Her build was slight, her pyjamas pink, and there was a white band like mine round her wrist."
+    "What really stood out about her was her hair, which reached nearly to her waist."
+    scene e b
+    "\"You aren't... enjoying that, are you?\""
+    "I didn't really mean anything by the question." "I just felt it was my duty to say something. As the sole other member of the human race present."
+    "\"Not really...\""
+    "She replied curtly, without so much as a glance in my direction."
+    "Perhaps she hadn't really registered my presence." "Her eyes remained fixed on the screen in front of her."
+    "Don't watch it, then, I said... nearly."
+    "Discretion overruled me, and I lowered myself into a chair instead."
+    "And sat there beside her watching the tedious programme." "There wasn't anything else for me to do. There wasn't anything else I could do."
+    scene e w
+    $renpy.pause(0.4)
+    scene e b
+    "We watched on in silence."
+    "The screen was filled with the usual January twaddle." "A tedious variety show, all conjurers and impersonators."
+    "From time to time the speakers would rattle with the compere's shrill and foolish laughter." "It echoed emptily in the sunlit room."
+    scene e danwa
+    $renpy.pause(0.1)
+    "\"...so...\""
+    "It took me a moment to realise that she'd spoken." "Her eyes still hadn't left the TV screen for one moment."
+    "\"Which time are you on...?\""
+    "\"I'm... not sure what you mean.\""
+    "\"I mean, how many times have you been up here?\""
+    "\"Sorry... I still don't understand.\""
+    "\"............\""
+    "\"It must be your first, then.\""
+    "My incomprehension was evidently a sufficient answer for her."
+    "\"In that case, I suppose it's up to me... since there's nobody else here now...\""
+    "\"It's up to you...?\""
+    "\"That's the rule...\""
+    "The rule, she added, was that newcomers to this seventh floor were to be told certain things."
+    "I had no idea what she was talking about."
+    "She began to explain, still without so much as a glance in my direction."
+    "\"Listen carefully, then...\""
+    scene e b
+    "............"
+    "She spoke haltingly."
+    "What she had to tell me differed in certain regards from the speech I'd received prior to my transfer up here."
+    "According to the doctors, this was where one would come to wait for advances in treatments; in the meantime, being here might heal one's heart."
+    "He was probably sincere. He may even have been telling the truth."
+    "According to what the girl told me, however, that's merely the official line."
+    "This was not, in fact, the part of the hospital where unique treatments are tried."
+    "It was where you wait for your life to run out."
+    "That's what she told me. I believed it. I'd pretty much come to the same conclusion myself."
+    scene e danwa
+    "\"So this is my second time...\""
+    "\"Your second time for what?\""
+    "\"...that I've ended up here.\""
+    "Finally she got round to explaining the whole \"times\" business."
+    "Firstly, that this isn't usually just a place where you come and stay until you die."
+    "Even if there's no chance of recovery, they let you go home temporarily if your condition improves."
+    "Then after a while you decline again, and they bring you back."
+    "You go back and forth, and eventually it ends."
+    "The only uncertainty is whether you'll be at home, or here on the seventh floor, when the time comes." "You'll die, here or there. It's happened to everyone."
+    "And that's the sense in which she was referring to this as the second time she'd ended up here."
+    "\"Now, I'm only going to say this once...\""
+    "\"So you've got to listen carefully from now on.\""
+    scene e b
+    "She continued, her pose unchanged, her eyes still on the screen."
+    "The subject changed, but not to everyday trivia like lights-out times."
+    "There was something rather different she had to tell me."
+    "\"When you reach your third temporary discharge, prepare yourself. There's hardly ever a fourth time. You won't be going home again.\""
+    "\"If you want to run away, don't try to use M--- station; go to K----- station instead.\""
+    "\"Don't eat anything. That's the best way out. You'll put the least burden on your family that way.\""
+    "These, I realised, were the maxims of the seventh floor."
+    "The received wisdom distilled from the experiences of those who had faced death here."
+    "Our lore, passed down orally from one ephemeral generation to the next."
+    "Our 'ars moriendi'."
+    scene e danwa
+    "\"Was telling me that the thing you said was up to you?\""
+    "\"That's right...\""
+    "\"It'll be up to you to pass it on to the next newcomer.\""
+    "That concluded the lecture." "As she rose and turned, her hair swept round; a lock brushed against my cheek."
+    "\"Time for my temperature reading...\""
+    scene e b
+    "She turned her back on me and walked off, out into the corridor."
+    "I was left alone in the room, alone with the shrilly laughing TV and the white flowers by the window."
+    "She had not looked at me once."
+    scene e b
+    $renpy.pause(2)
+    play music "bgm/blank.ogg"
+    scene e c042_h
+    ""
+    scene e sora01
+    "Some days passed."
+    play sound "tui2/e01.ogg"
+    "It was the time of year when TV schedules return to normal, the start of the so-called spring term."
+    "We were in the lounge again, staring at the TV as usual."
+    scene e danwa
+    "\"This is crap.\""
+    "\"Yeah...\""
+    "And yet we carried on watching as we talked."
+    "\"Is it always like this up here?\""
+    "\"I'm not sure what you're getting at.\""
+    "\"I mean, is it always this quiet?\""
+    "If you discount the doctors and nurses and their helpers - the people who look after us - then I haven't seen anyone up here but the two of us."
+    "\"Is it just because it's early in the year?\""
+    "\"...do you want to know the reason?\""
+    "\"Uh, no, not that badly...\""
+    "\"...then I shan't tell you.\""
+    "That sort of exchange was the closest we got to conversation."
+    "The windows were open to their fullest extent; the gap that afforded was meagre, but it let the air in."
+    "So there was a gentle breeze in the room, enough to stir the girl's hair." "Enough to bring life to the room's only decoration, the white flowers by the window."
+    "That was how we passed the time." "Sitting drearily in front of a dull television."
+    scene e b
+    play sound "se/hayaasi.wav"
+    "The sound of approaching footsteps."
+    "\"So this is where you've been!\""
+    "This was our nurse, a woman advanced in years."
+    "From what I'd been able to gather from passing glances into the nurse's station, she was the one in charge of the seventh floor."
+    "\"How are you, Setsumi-san? Not running a fever, I hope?\""
+    "\"No... I'm fine...\""
+    "Setsumi."
+    "Setsumi." "" "That was her name. That was how I learnt it."
+    "\"Well, as long as you don't go wandering around outside by yourself again...\""
+    "\"............\""
+    "\"All right? You had us all horribly worried.\""
+    "\"...oh, whatever...\""
+    "\"Well, what a thing to say!\""
+    "\"I don't know, young people today...\""
+    "The nurse scolded on in the background."
+    "The girl... Setsumi?... just sat there, apparently ignoring her, with an expression of utter disinterest."
+    "She stared all the more determinedly at the television, though the programme was as boring as usual."
+    "\"...and don't forget, we've got to take you for another blood sample later.\""
+    "The scolding subsided at last, and the nurse departed for her station."
+    scene e danwa
+    "\"Um, are you...\""
+    "\"I mean... can I call you Setsumi?\""
+    "As I asked, I squinted at her wristband, trying to read the name (and blood group) that I knew would be written on it."
+    "\"............\""
+    "\"Are you okay? Setsumi?\""
+    "\"...how dare you leave off the honorific?\""
+    "\"...sorry?\""
+    "\"A kid like you...\""
+    "\"You what? How do you make out I'm a kid?!\""
+    "\"Aren't you? Compared to me, anyway.\""
+    "My blood boiled. It wasn't exactly that I objected to being thought of as young."
+    "It was just that the girl had to be at least five years younger than me. Probably six."
+    "That's why I reacted the way I did. Why I reached into my breast pocket, pulled out that licence, and thrusted it at her."
+    "\"All right? I may look young, but I'm 20, see?\""
+    "\"............\""
+    "Her eyes flickered momentarily towards the licence."
+    "\"Like I said. A kid.\""
+    "\"What's that meant to mean?\""
+    "\"Does it matter? I'm just a bit older than that, that's all.\""
+    "Her face was expressionless, as always."
+    "And her eyes remained fixed on the TV."
+    "But it seemed to me they were focused not on the screen, but on some point in the far distance..."
+    scene e b
+    $renpy.pause(2)
+    play music "bgm/blank.ogg"
+    scene e byoin7_rouka
+    plau music "tui/sen032.ogg"
+    "The next morning, after my temperature reading, I sneaked into the lift and took it down to the ground floor."
+    scene e byoin_rouka
+    "The outpatients' exit was unwatched. I crept out that way and headed for the exit from the hospital campus."
+    scene e b
+    "My intended destination was the further of the two nearby stations."
+    "I had learned the rules by heart. \"Don't try to use M--- station; go to K----- station instead.\""
+    "I wasn't exactly trying to run away."
+    "I knew that was no good. I would die on the seventh floor, or at home." "I knew there was no other option. If anyone had tried to run, they hadn't escaped."
+    "But the girl, Setsumi... I gathered she'd been as far as this station several times."
+    "I just wanted to try it for myself. See it for myself."
+    "It wasn't like there were going to be guards on the lookout."
+    "Nonetheless, we were the inhabitants of the seventh floor." "We weren't like the other patients."
+    "Still wondering, I pressed on towards the station."
+    "It was still early, and those around me were on their way to work or school." "I slowed my pace, but continued to walk."
+    scene e w
+    $renpy.pause(0.4)
+    scene e b
+    "It turned out to be about 25 minutes' walk to the station." "In bus terms, it would be about four stops away."
+    "It was pretty crowded for its size."
+    "That was my first impression of the place."
+    "If I'd been trying to escape, it would have been stupidly easy."
+    "I stood out rather, being dressed in pyjamas, but even so nobody challenged me."
+    "Whether things would have been different at M--- station, I don't know, but here I could just have bought a ticket and jumped on a train to anywhere, no questions asked."
+    "There was something funny about this." "She'd been here. She'd come this far several times, if I understood correctly."
+    "That's what puzzled me, as I stood there in the morning sunlight, watching the comings and goings of passers-by."
+    "Why did she stop here?" "Why was she still living on the seventh floor?"
+    scene e sora_yoru01
+    "Night fell. Lights-out time passed."
+    "Tired of reading, and unable to sleep, I ended up wandering around the hospital."
+    "As an ordinary patient I wouldn't have dared risk the nurses' wrath in such a way." "But we of the seventh floor were given more freedom than most."
+    "My wandering feet led me down the dimly illuminated corridor and into the lounge area."
+    "That's where she was, too."
+    scene e danwa_yoru
+    "\"Heh, you're looking outside for a change today?\""
+    "\"...yeah.\""
+    "She was standing by the window in the darkened room." "She acknowledged my presence, but her face did not turn from the glass."
+    "I began to tell her about my day."
+    "\"Hey, you know what? I went to the station today.\""
+    "\"............\""
+    "\"To K----- station, of course, like you told me. Just to have a look.\""
+    "\"Really...\""
+    "The usual response."
+    "I'd hoped that talking about a shared experience might cause her to open up a little."
+    "But maybe it wasn't really something she cared about."
+    "But maybe it wasn't really something she cared about." "" "Maybe she was still here because she wasn't interested in running."
+    "\"I'll be... going home again soon...\""
+    "\"Eh?\""
+    "That took me by surprise. She'd never volunteered any personal information like that before."
+    "But I could see the connection." "I reckoned she could tell what I'd been thinking."
+    "\"If I come back it'll be my third time. So..."
+    "\"If I come back it'll be my third time. So..." "we might not meet again.\""
+    "\"Um... yeah, I suppose...\""
+    "By \"going home\", she had to be referring to a temporary discharge."
+    "The lore was quite clear on this point: basically nobody was admitted to the seventh floor more than three times."
+    "That applied to us above all. The condition progresses faster in our age group than among older people."
+    "She was quite right. It was entirely plausible that we might never meet again."
+    "\"Tell me... which will you choose?\""
+    "\"Which what?\""
+    "\"...where will you decide to die?\""
+    "\"............\""
+    "\"Die\". Such a sudden word, spoken so suddenly." "For a moment I'm at a loss for a reply."
+    "\"I don't know... haven't really thought about it.\""
+    "\"No... you're still on your first time...\""
+    "Her response was muted, murmured. Disappointed."
+    "She was right. I would have to decide sooner or later. I couldn't stay here for ever."
+    "I was going to go through the same process as everyone else before me."
+    "Out. Back in, weaker. Back out. Back in, weaker still."
+    "I would only have one decision to make: whether to die here on the seventh floor, or at home, smothered in false smiles."
+    "\"I don't want to... die at home...\""
+    $renpy.pause(0.3)
+    "\"...but I can't face it here either...\""
+    "\"What will you do, then?\""
+    "\"............\""
+    "\"...there's not a lot I can.\""
+    $renpy.pause(0.2)
+    "\"Maybe I'll just... walk, for as long as I can...\""
+    "\"Where to?\""
+    "So she was planning to run away." "But then why, why, was she still here?"
+    "\"Do you, uh, have anywhere in mind?\""
+    "\"............\""
+    "\"Are you going to try and stop me?\""
+    "\"I, uh...\""
+    "\"Or... were you hoping to come with me?\""
+    "\"No, that... that's not why, I was just, uh... you know... asking...\""
+    "\"Please... don't.\""
+    "She spoke disinterestedly, without lifting her gaze from the window for a moment." "She still had not once so much as looked at me."
+    "And though her face, such of it as I could see, was always expressionless, now I thought I saw a despair in it that had not been there before."
+    scene e sora_yoru01
+    "'The third admission is the last'. That's what the lore said." "And she was coming to the end of her second time."
+    "There was no way that I, a first-timer, would understand what that meant." "I, who had still not fully grasped the certainty and imminence of my own mortality."
+    "I knew that would change. Soon I too would have cause to wear that face..."
+    scene e w
+    $renpy.pause(2.5)
+    play music "bgm/blank.ogg"
+    play sound "se/rain_1.wav"
+    scene e sora_ame01
+    "It was raining."
+    "From time to time the rain would soften to sleet or harden to snow, would sheet or drizzle, but it never stopped."
+    play music "bgm/n03.ogg"
+    scene e danwa_ame
+    "I was indoors, of course." "Sitting in my usual place, in front of the TV on the empty seventh floor."
+    "\"Is there anything on?\""
+    "\"The usual crap...\""
+    "She passed behind me and lowered herself into the next chair without another word."
+    "Clearly we were going to have another thrilling day."
+    "She was probably just as bored as I was."
+    "But we had nothing better to do. There was nothing else we could do."
+    scene e b
+    "\"...oh!...\""
+    "A reaction? This was unprecedented."
+    "\"What is it?\""
+    "\"...nothing.\""
+    "Her reply was the same as ever." "But she wouldn't have gasped for nothing."
+    "Startled and intrigued, all at once I began to take in what the TV was showing."
+    scene e w
+    "It was some natural history programme."
+    "The screen was filled with the countryside; trees and flowers mingled in the background."
+    "The focus, however, was on the foreground. A host of white flowers."
+    scene e tv_hana
+    "Flowers I recognised."
+    "They looked just like the ones that were still by the window, decorating the lounge."
+    "\"Aren't those what we've got in here?\""
+    "\"............\""
+    "\"They look the same, don't they?\""
+    "I pointed at the screen, then at the vase by the window."
+    "\"They aren't.\""
+    "\"Are you sure? They look like it...\""
+    "\"Same species... different variety.\""
+    "She had barely glanced at the flowers here before her eyes swung back to those on the screen."
+    "To be perfectly frank, even knowing they were not the same thing, I was still unable to detect any way in which the two varieties differed."
+    "It was all the same to me anyway. Botany was not a subject for which I had ever felt any particular passion."
+    "I stuck with the subject not because it interested me, but because it appeared to interest her."
+    "It was rare for her to allow a conversation to continue even this far."
+    scene e danwa_ame
+    "\"You seem to know an awful lot. Is this the kind of thing you're into?\""
+    "\"Not really.\""
+    "\"What, really? I'd thought you'd need to be, to be able to see the difference...\""
+    "Two sets of flowers. One alive but distant, the sea of white blooms within the screen."
+    "The other so near, just beyond the girl... but dying in a vase."
+    "I made another attempt to revive the conversation."
+    "\"What are they, anyway? Orchids, or lilies, or something?\""
+    "\"............\""
+    "\"I can't think of anything else white...\""
+    "\"............\""
+    scene e b
+    "This was hard going. I did my best to feign interest, but it was all I could do to keep talking."
+    "As for the girl, she'd already apparently lapsed back into her usual silent and detached state."
+    "Either the subject didn't appeal to her after all, or she had realised it didn't appeal to me."
+    "I was on the verge of giving up and switching off myself, when..."
+    scene e w
+    "\"Narcissi...\""
+    "\"What?\""
+    "\"They're narcissi.\""
+    scene e chara_0013
+    $renpy.pause(0.4)
+    scene e chara_001
+    "As she spoke..."
+    "As she spoke..." "she looked at me for the first time."
+    "Shaking her waist-length hair, and indicating the flowers on the screen with one slender finger, she turned to face me."
+    "Her skin was paler than the flowers on the screen, but whiter still was the band round her wrist."
+    "And for the first time I got a proper view of her face."
+    "It almost seemed to betray a hint of a smile."
+    scene e w
+    $renpy.pause(0.4)
+    play sound "bgm/blank.ogg"
+    if persistent.haeChar < 1:
+		$persistent.haeChar = 1
+	else:
+		pass
+	$haeChar = haeChar + 1
+	jump minititle
+#KILLSWITCH
 label quit:
     $renpy.quit()

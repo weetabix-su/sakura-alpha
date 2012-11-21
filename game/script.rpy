@@ -161,6 +161,7 @@ init:
     image yobi cat09_h = "yobi/cat09_h.jpg"
 label start:
     $gameStart = false
+    $ver = 0
     "Note: [Narcissu] contains voice data." "" "Turn on voice data?"
     menu:
 		"Yes":
@@ -175,7 +176,329 @@ label minititle:
         scene sys mini_title
         play music "tui/sen032.ogg"
         "Written by Tomo Kataoka" "[stage-nana] Volume 24"
-        jump warn
+        if persistent.gameON == true:
+            "Select version to load."
+            menu:
+                "gp32":
+                    $self.state.hide_text = true
+                    $gameStart = true
+                    $ver = 1
+                    if persistent.gp32ON = true:
+                        if persistent.gp32Char == 0:
+                            menu:
+                                "Prologue":
+                                    $gp32Char = 0
+                                    jump GP_prologue
+                                "7F":
+                                    $gp32Char = 0
+                                    jump minititle
+                        elif persistent.gp32Char == 1:
+                            menu:
+                                "Prologue":
+                                    $gp32Char = 0
+                                    jump GP_prologue
+                                "7F":
+                                    $gp32Char = 0
+                                    jump minititle
+                                "The Silver Coupe"
+                                    $gp32Char = 1
+                                    jump minititle
+                        elif persistent.gp32Char == 2:
+                            menu:
+                                "Prologue":
+                                    $gp32Char = 0
+                                    jump GP_prologue
+                                "7F":
+                                    $gp32Char = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $gp32Char = 1
+                                    jump minititle
+                                "Map":
+                                    $gp32Char = 2
+                                    jump minititle
+                        elif persistent.gp32Char == 3:
+                            menu:
+                                "Prologue":
+                                    $gp32Char = 0
+                                    jump GP_prologue
+                                "7F":
+                                    $gp32Char = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $gp32Char = 1
+                                    jump minititle
+                                "Map":
+                                    $gp32Char = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $gp32Char = 3
+                                    jump minititle
+                        elif persistent.gp32Char == 4:
+                            menu:
+                                "Prologue":
+                                    $gp32Char = 0
+                                    jump GP_prologue
+                                "7F":
+                                    $gp32Char = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $gp32Char = 1
+                                    jump minititle
+                                "Map":
+                                    $gp32Char = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $gp32Char = 3
+                                    jump minititle
+                                "#1 Route":
+                                    $gp32Char = 4
+                                    jump minititle
+                        elif persistent.gp32Char == 5:
+                            menu:
+                                "Prologue":
+                                    $gp32Char = 0
+                                    jump GP_prologue
+                                "7F":
+                                    $gp32Char = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $gp32Char = 1
+                                    jump minititle
+                                "Map":
+                                    $gp32Char = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $gp32Char = 3
+                                    jump minititle
+                                "#1 Route":
+                                    $gp32Char = 4
+                                    jump minititle
+                                "Echo":
+                                    $gp32Char = 5
+                                    jump minititle
+                        elif persistent.gp32Char == 6:
+                            menu:
+                                "Prologue":
+                                    $gp32Char = 0
+                                    jump GP_prologue
+                                "7F":
+                                    $gp32Char = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $gp32Char = 1
+                                    jump minititle
+                                "Map":
+                                    $gp32Char = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $gp32Char = 3
+                                    jump minititle
+                                "#1 Route":
+                                    $gp32Char = 4
+                                    jump minititle
+                                "Echo":
+                                    $gp32Char = 5
+                                    jump minititle
+                                "Narcissu":
+                                    $gp32Char = 6
+                                    jump minititle
+                        elif persistent.gp32Char == 7:
+                            menu:
+                                "Prologue":
+                                    $gp32Char = 0
+                                    jump GP_prologue
+                                "7F":
+                                    $gp32Char = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $gp32Char = 1
+                                    jump minititle
+                                "Map":
+                                    $gp32Char = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $gp32Char = 3
+                                    jump minititle
+                                "#1 Route":
+                                    $gp32Char = 4
+                                    jump minititle
+                                "Echo":
+                                    $gp32Char = 5
+                                    jump minititle
+                                "Narcissu":
+                                    $gp32Char = 6
+                                    jump minititle
+                                "Shiraishi Construction":
+                                    $gp32Char = 7
+                                    jump minititle
+                    else:
+                        $persistent.gp32ON = true
+                        jump GP_prologue
+                "Haeleth":
+                    $self.state.hide_text = true
+                    $gameStart = true
+                    $ver = 2
+                    if persistent.haeON = true:
+                        if persistent.haeChar == 0:
+                            menu:
+                                "Prologue":
+                                    $haeChar = 0
+                                    jump HAE_prologue
+                                "The Seventh Floor":
+                                    $haeChar = 0
+                                    jump minititle
+                        elif persistent.haeChar == 1:
+                            menu:
+                                "Prologue":
+                                    $haeChar = 0
+                                    jump HAE_prologue
+                                "The Seventh Floor":
+                                    $haeChar = 0
+                                    jump minititle
+                                "The Silver Coupe"
+                                    $haeChar = 1
+                                    jump minititle
+                        elif persistent.haeChar == 2:
+                            menu:
+                                "Prologue":
+                                    $haeChar = 0
+                                    jump HAE_prologue
+                                "The Seventh Floor":
+                                    $haeChar = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $haeChar = 1
+                                    jump minititle
+                                "Maps":
+                                    $haeChar = 2
+                                    jump minititle
+                        elif persistent.haeChar == 3:
+                            menu:
+                                "Prologue":
+                                    $haeChar = 0
+                                    jump HAE_prologue
+                                "The Seventh Floor":
+                                    $haeChar = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $haeChar = 1
+                                    jump minititle
+                                "Maps":
+                                    $haeChar = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $haeChar = 3
+                                    jump minititle
+                        elif persistent.haeChar == 4:
+                            menu:
+                                "Prologue":
+                                    $haeChar = 0
+                                    jump HAE_prologue
+                                "The Seventh Floor":
+                                    $haeChar = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $haeChar = 1
+                                    jump minititle
+                                "Maps":
+                                    $haeChar = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $haeChar = 3
+                                    jump minititle
+                                "Route One":
+                                    $haeChar = 4
+                                    jump minititle
+                        elif persistent.haeChar == 5:
+                            menu:
+                                "Prologue":
+                                    $haeChar = 0
+                                    jump HAE_prologue
+                                "The Seventh Floor":
+                                    $haeChar = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $haeChar = 1
+                                    jump minititle
+                                "Maps":
+                                    $haeChar = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $haeChar = 3
+                                    jump minititle
+                                "Route One":
+                                    $haeChar = 4
+                                    jump minititle
+                                "Echo":
+                                    $haeChar = 5
+                                    jump minititle
+                        elif persistent.haeChar == 6:
+                            menu:
+                                "Prologue":
+                                    $haeChar = 0
+                                    jump HAE_prologue
+                                "The Seventh Floor":
+                                    $haeChar = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $haeChar = 1
+                                    jump minititle
+                                "Maps":
+                                    $haeChar = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $haeChar = 3
+                                    jump minititle
+                                "Route One":
+                                    $haeChar = 4
+                                    jump minititle
+                                "Echo":
+                                    $haeChar = 5
+                                    jump minititle
+                                "Narcissus":
+                                    $haeChar = 6
+                                    jump minititle
+                        elif persistent.haeChar == 7:
+                            menu:
+                                "Prologue":
+                                    $haeChar = 0
+                                    jump HAE_prologue
+                                "The Seventh Floor":
+                                    $haeChar = 0
+                                    jump minititle
+                                "The Silver Coupe":
+                                    $haeChar = 1
+                                    jump minititle
+                                "Maps":
+                                    $haeChar = 2
+                                    jump minititle
+                                "The Emerald Sea":
+                                    $haeChar = 3
+                                    jump minititle
+                                "Route One":
+                                    $haeChar = 4
+                                    jump minititle
+                                "Echo":
+                                    $haeChar = 5
+                                    jump minititle
+                                "Narcissus":
+                                    $haeChar = 6
+                                    jump minititle
+                                "Shiraishi Construction":
+                                    $haeChar = 7
+                                    jump minititle
+                    else:
+                        $gameStart = true
+                        $persistent.haeON = true
+                        jump HAE_prologue
+                "Agilis":
+                    $gameStart = true
+                    $ver = 3
+                    "The Agilis version of [Narcissu] han not been added to the game's script yet. For updates, please check https://github.com/weetabix-su/sakura-alpha or contact [weetabix] via e-mail (vovo27_miranemiko@yahoo.co.jp) or Twitter (@weetabix_su). Thank you." "" "Press X to Quit"
+                    jump quit
+        else:
+            jump warn
     if gameStart == true:
         scene sys mini_title
         if ver == 1:
@@ -239,10 +562,10 @@ label warn:
     $persistent.gp32Char = 0
     $persistent.haeChar = 0
     $persistent.agiChar = 0
-    $persistent.gp32ON= false
+    $persistent.gp32ON = false
     $persistent.haeON = false
     $persistent.agiON = false
-    $ver = 0
+    $persistent.gameON = false
     "Note: The English Version of 'Narcissu' contains three different versions from the following translators: Seung Park (gp32), Peter Jolly (Haeleth), and Randy Au (Agilis)"
     "Select a version which you most prefer."
     menu:
@@ -253,6 +576,7 @@ label warn:
             $gameStart = true
             $ver = 1
             $persistent.gp32ON = true
+            $persistent.gameON = true
             jump GP_prologue
         "Haeleth":
             $renpy.block_rollback()
@@ -262,6 +586,7 @@ label warn:
             $gameStart = true
             $ver = 2
             $persistent.haeON = true
+            $persistent.gameON = true
             jump HAE_prologue
         "Agilis":
 			$renpy.block_rollback()
@@ -483,12 +808,20 @@ label HAE_prologue:
     scene e c003
     $renpy.pause(0.7)
     scene e c004
+    if voc == true:
+    	play sound "w/n001.wav"
+	else:
+		pass
     ""
     play sound "se/rain_1.wav"
     scene e c02
     "- Spring 1996 : Setsumi -"
     play music "bgm/n04.ogg"
     scene e sora_ame01
+    if voc == true:
+    	play sound "w/n002.wav"
+	else:
+		pass
     "\"My health was never particularly good, sure...\""
     "But I was able to attend primary school like anyone else." "In the summer holidays I was able to play till the sun burnt me black."
     scene e byoin_heya_yu2
@@ -508,17 +841,41 @@ label HAE_prologue:
     "Then strangers."
     "With each change of the seasons, I faded from more memories."
     scene e chara_k01
+    if voc == true:
+    	play sound "w/n003.wav"
+	else:
+		pass
     "\"I suppose they... don't like seeing me.\""
     $renpy.pause(0.3)
+    if voc == true:
+    	play sound "w/n004.wav"
+	else:
+		pass
     "\"If you've got a normal life, you don't want someone like me in it...\""
+    if voc == true:
+    	play sound "w/n005.wav"
+	else:
+		pass
     "\"So they blank me out...\""
     play sound "se/rain_1.wav"
     scene e w
     $renpy.pause(0.4)
     scene e sora_ame03
+    if voc == true:
+    	play sound "w/n006.wav"
+	else:
+		pass
     "\"I've passed all these seasons, under that white overcast sky, without needing to speak to anyone...\""
+    if voc == true:
+    	play sound "w/n007.wav"
+	else:
+		pass
     "\"My English textbook is untouched from the first-year midterms onwards...\""
     scene e chara_0012
+    if voc == true:
+    	play sound "w/n006.wav"
+	else:
+		pass
     "\"As though..."
     "\"As though... even time stopped for me there...\""
     scene e chara_0013b
@@ -1213,6 +1570,10 @@ label GP_honpen2:
 label HAE_honpen2:
 	scene e b
     $renpy.pause(0.8)
+    if voc == true:
+        play sound "w/n010.wav"
+	else:
+        pass
     scene e c04_h
     ""
     play music "bgm/n04.ogg"
@@ -1227,6 +1588,10 @@ label HAE_honpen2:
     scene e b
     "\"You aren't... enjoying that, are you?\""
     "I didn't really mean anything by the question." "I just felt it was my duty to say something. As the sole other member of the human race present."
+    if voc == true:
+    	play sound "w/nv011b.wav"
+	else:
+		pass
     "\"Not really...\""
     "She replied curtly, without so much as a glance in my direction."
     "Perhaps she hadn't really registered my presence." "Her eyes remained fixed on the screen in front of her."
@@ -1241,21 +1606,49 @@ label HAE_honpen2:
     "From time to time the speakers would rattle with the compere's shrill and foolish laughter." "It echoed emptily in the sunlit room."
     scene e danwa
     $renpy.pause(0.1)
+    if voc == true:
+    	play sound "w/nv012.wav"
+	else:
+		pass
     "\"...so...\""
     "It took me a moment to realise that she'd spoken." "Her eyes still hadn't left the TV screen for one moment."
+    if voc == true:
+    	play sound "w/nv013.wav"
+	else:
+		pass
     "\"Which time are you on...?\""
     "\"I'm... not sure what you mean.\""
+    if voc == true:
+    	play sound "w/nv014.wav"
+	else:
+		pass
     "\"I mean, how many times have you been up here?\""
     "\"Sorry... I still don't understand.\""
     "\"............\""
+    if voc == true:
+        play sound "w/nv016.wav"
+	else:
+		pass
     "\"It must be your first, then.\""
     "My incomprehension was evidently a sufficient answer for her."
+    if voc == true:
+        play sound "w/nv017.wav"
+	else:
+		pass
     "\"In that case, I suppose it's up to me... since there's nobody else here now...\""
     "\"It's up to you...?\""
+    if voc == true:
+        play sound "w/nv018.wav"
+	else:
+		pass
     "\"That's the rule...\""
     "The rule, she added, was that newcomers to this seventh floor were to be told certain things."
     "I had no idea what she was talking about."
     "She began to explain, still without so much as a glance in my direction."
+    if voc == true:
+        play sound "w/nv019.wav"
+	else:
+		pass
     "\"Listen carefully, then...\""
     scene e b
     "............"
@@ -1268,8 +1661,16 @@ label HAE_honpen2:
     "It was where you wait for your life to run out."
     "That's what she told me. I believed it. I'd pretty much come to the same conclusion myself."
     scene e danwa
+    if voc == true:
+        play sound "w/nv020.wav"
+	else:
+		pass
     "\"So this is my second time...\""
     "\"Your second time for what?\""
+    if voc == true:
+        play sound "w/nv021b_a.wav"
+	else:
+		pass
     "\"...that I've ended up here.\""
     "Finally she got round to explaining the whole \"times\" business."
     "Firstly, that this isn't usually just a place where you come and stay until you die."
@@ -1278,7 +1679,15 @@ label HAE_honpen2:
     "You go back and forth, and eventually it ends."
     "The only uncertainty is whether you'll be at home, or here on the seventh floor, when the time comes." "You'll die, here or there. It's happened to everyone."
     "And that's the sense in which she was referring to this as the second time she'd ended up here."
+    if voc == true:
+        play sound "w/nv021.wav"
+	else:
+		pass
     "\"Now, I'm only going to say this once...\""
+    if voc == true:
+        play sound "w/nv022.wav"
+	else:
+		pass
     "\"So you've got to listen carefully from now on.\""
     scene e b
     "She continued, her pose unchanged, her eyes still on the screen."
@@ -1293,9 +1702,21 @@ label HAE_honpen2:
     "Our 'ars moriendi'."
     scene e danwa
     "\"Was telling me that the thing you said was up to you?\""
+    if voc == true:
+        play sound "w/nv023.wav"
+	else:
+		pass
     "\"That's right...\""
+    if voc == true:
+        play sound "w/nv024.wav"
+	else:
+		pass
     "\"It'll be up to you to pass it on to the next newcomer.\""
     "That concluded the lecture." "As she rose and turned, her hair swept round; a lock brushed against my cheek."
+    if voc == true:
+        play sound "w/nv025.wav"
+	else:
+		pass
     "\"Time for my temperature reading...\""
     scene e b
     "She turned her back on me and walked off, out into the corridor."
@@ -1313,15 +1734,31 @@ label HAE_honpen2:
     "We were in the lounge again, staring at the TV as usual."
     scene e danwa
     "\"This is crap.\""
+    if voc == true:
+        play sound "w/nv026.wav"
+	else:
+		pass
     "\"Yeah...\""
     "And yet we carried on watching as we talked."
     "\"Is it always like this up here?\""
+    if voc == true:
+        play sound "w/nv027.wav"
+	else:
+		pass
     "\"I'm not sure what you're getting at.\""
     "\"I mean, is it always this quiet?\""
     "If you discount the doctors and nurses and their helpers - the people who look after us - then I haven't seen anyone up here but the two of us."
     "\"Is it just because it's early in the year?\""
+    if voc == true:
+        play sound "w/nv028.wav"
+	else:
+		pass
     "\"...do you want to know the reason?\""
     "\"Uh, no, not that badly...\""
+    if voc == true:
+        play sound "w/nv029.wav"
+    else:
+		pass
     "\"...then I shan't tell you.\""
     "That sort of exchange was the closest we got to conversation."
     "The windows were open to their fullest extent; the gap that afforded was meagre, but it let the air in."
@@ -1334,12 +1771,24 @@ label HAE_honpen2:
     "This was our nurse, a woman advanced in years."
     "From what I'd been able to gather from passing glances into the nurse's station, she was the one in charge of the seventh floor."
     "\"How are you, Setsumi-san? Not running a fever, I hope?\""
+    if voc == true:
+        play sound "w/nv030.wav"
+    else:
+		pass
     "\"No... I'm fine...\""
     "Setsumi."
     "Setsumi." "" "That was her name. That was how I learnt it."
     "\"Well, as long as you don't go wandering around outside by yourself again...\""
+    if voc == true:
+        play sound "w/nv033.wav"
+    else:
+		pass
     "\"............\""
     "\"All right? You had us all horribly worried.\""
+    if voc == true:
+        play sound "w/nv032.wav"
+    else:
+		pass
     "\"...oh, whatever...\""
     "\"Well, what a thing to say!\""
     "\"I don't know, young people today...\""
@@ -1352,19 +1801,43 @@ label HAE_honpen2:
     "\"Um, are you...\""
     "\"I mean... can I call you Setsumi?\""
     "As I asked, I squinted at her wristband, trying to read the name (and blood group) that I knew would be written on it."
+    if voc == true:
+        play sound "w/n055.wav"
+    else:
+		pass
     "\"............\""
     "\"Are you okay? Setsumi?\""
+    if voc == true:
+        play sound "w/n035.wav"
+    else:
+    	pass
     "\"...how dare you leave off the honorific?\""
     "\"...sorry?\""
+    if voc == true:
+        play sound "w/n036.wav"
+    else:
+    	pass
     "\"A kid like you...\""
     "\"You what? How do you make out I'm a kid?!\""
+    if voc == true:
+        play sound "w/n037.wav"
+    else:
+    	pass
     "\"Aren't you? Compared to me, anyway.\""
     "My blood boiled. It wasn't exactly that I objected to being thought of as young."
     "It was just that the girl had to be at least five years younger than me. Probably six."
     "That's why I reacted the way I did. Why I reached into my breast pocket, pulled out that licence, and thrusted it at her."
     "\"All right? I may look young, but I'm 20, see?\""
+    if voc == true:
+        play sound "w/n055.wav"
+    else:
+    	pass
     "\"............\""
     "Her eyes flickered momentarily towards the licence."
+    if voc == true:
+        play sound "w/n039.wav"
+    else:
+    	pass
     "\"Like I said. A kid.\""
     "\"What's that meant to mean?\""
     "\"Does it matter? I'm just a bit older than that, that's all.\""
@@ -1410,56 +1883,124 @@ label HAE_honpen2:
     "That's where she was, too."
     scene e danwa_yoru
     "\"Heh, you're looking outside for a change today?\""
+    if voc == true:
+        play sound "w/nv044.wav"
+    else:
+    	pass
     "\"...yeah.\""
     "She was standing by the window in the darkened room." "She acknowledged my presence, but her face did not turn from the glass."
     "I began to tell her about my day."
     "\"Hey, you know what? I went to the station today.\""
     "\"............\""
     "\"To K----- station, of course, like you told me. Just to have a look.\""
+    if voc == true:
+        play sound "w/nv079.wav"
+    else:
+        pass
     "\"Really...\""
     "The usual response."
     "I'd hoped that talking about a shared experience might cause her to open up a little."
     "But maybe it wasn't really something she cared about."
     "But maybe it wasn't really something she cared about." "" "Maybe she was still here because she wasn't interested in running."
+    if voc == true:
+        play sound "w/nv047.wav"
+    else:
+        pass
     "\"I'll be... going home again soon...\""
     "\"Eh?\""
     "That took me by surprise. She'd never volunteered any personal information like that before."
     "But I could see the connection." "I reckoned she could tell what I'd been thinking."
+    if voc == true:
+        play sound "w/nv048b.wav"
+    else:
+        pass
     "\"If I come back it'll be my third time. So..."
+    if voc == true:
+        play sound "w/nv048_1c.wav"
+    else:
+        pass
     "\"If I come back it'll be my third time. So..." "we might not meet again.\""
     "\"Um... yeah, I suppose...\""
     "By \"going home\", she had to be referring to a temporary discharge."
     "The lore was quite clear on this point: basically nobody was admitted to the seventh floor more than three times."
     "That applied to us above all. The condition progresses faster in our age group than among older people."
     "She was quite right. It was entirely plausible that we might never meet again."
+    if voc == true:
+        play sound "w/nv049.wav"
+    else:
+        pass
     "\"Tell me... which will you choose?\""
     "\"Which what?\""
+    if voc == true:
+        play sound "w/nv049_1b.wav"
+    else:
+        pass
     "\"...where will you decide to die?\""
     "\"............\""
     "\"Die\". Such a sudden word, spoken so suddenly." "For a moment I'm at a loss for a reply."
     "\"I don't know... haven't really thought about it.\""
+    if voc == true:
+        play sound "w/nv050.wav"
+    else:
+        pass
     "\"No... you're still on your first time...\""
     "Her response was muted, murmured. Disappointed."
     "She was right. I would have to decide sooner or later. I couldn't stay here for ever."
     "I was going to go through the same process as everyone else before me."
     "Out. Back in, weaker. Back out. Back in, weaker still."
     "I would only have one decision to make: whether to die here on the seventh floor, or at home, smothered in false smiles."
+    if voc == true:
+        play sound "w/nv051.wav"
+    else:
+        pass
     "\"I don't want to... die at home...\""
     $renpy.pause(0.3)
+    if voc == true:
+        play sound "w/nv052.wav"
+    else:
+        pass
     "\"...but I can't face it here either...\""
     "\"What will you do, then?\""
+    if voc == true:
+        play sound "w/nv055.wav"
+    else:
+        pass
     "\"............\""
+    if voc == true:
+        play sound "w/nv053.wav"
+    else:
+        pass
     "\"...there's not a lot I can.\""
     $renpy.pause(0.2)
+    if voc == true:
+        play sound "w/nv054b.wav"
+    else:
+        pass
     "\"Maybe I'll just... walk, for as long as I can...\""
     "\"Where to?\""
     "So she was planning to run away." "But then why, why, was she still here?"
     "\"Do you, uh, have anywhere in mind?\""
+    if voc == true:
+        play sound "w/nv055.wav"
+    else:
+        pass
     "\"............\""
+    if voc == true:
+        play sound "w/nv056.wav"
+    else:
+        pass
     "\"Are you going to try and stop me?\""
     "\"I, uh...\""
+    if voc == true:
+        play sound "w/nv057.wav"
+    else:
+        pass
     "\"Or... were you hoping to come with me?\""
     "\"No, that... that's not why, I was just, uh... you know... asking...\""
+    if voc == true:
+        play sound "w/nv059.wav"
+    else:
+        pass
     "\"Please... don't.\""
     "She spoke disinterestedly, without lifting her gaze from the window for a moment." "She still had not once so much as looked at me."
     "And though her face, such of it as I could see, was always expressionless, now I thought I saw a despair in it that had not been there before."
@@ -1477,6 +2018,10 @@ label HAE_honpen2:
     play music "bgm/n03.ogg"
     scene e danwa_ame
     "I was indoors, of course." "Sitting in my usual place, in front of the TV on the empty seventh floor."
+    if voc == true:
+        play sound "w/n061.wav"
+    else:
+        pass
     "\"Is there anything on?\""
     "\"The usual crap...\""
     "She passed behind me and lowered herself into the next chair without another word."
@@ -1484,9 +2029,17 @@ label HAE_honpen2:
     "She was probably just as bored as I was."
     "But we had nothing better to do. There was nothing else we could do."
     scene e b
+    if voc == true:
+        play sound "w/n062.wav"
+    else:
+        pass
     "\"...oh!...\""
     "A reaction? This was unprecedented."
     "\"What is it?\""
+    if voc == true:
+        play sound "w/n063.wav"
+    else:
+        pass
     "\"...nothing.\""
     "Her reply was the same as ever." "But she wouldn't have gasped for nothing."
     "Startled and intrigued, all at once I began to take in what the TV was showing."
@@ -1498,11 +2051,23 @@ label HAE_honpen2:
     "Flowers I recognised."
     "They looked just like the ones that were still by the window, decorating the lounge."
     "\"Aren't those what we've got in here?\""
+    if voc == true:
+        play sound "w/n064.wav"
+    else:
+        pass
     "\"............\""
     "\"They look the same, don't they?\""
     "I pointed at the screen, then at the vase by the window."
+    if voc == true:
+        play sound "w/n065.wav"
+    else:
+        pass
     "\"They aren't.\""
     "\"Are you sure? They look like it...\""
+    if voc == true:
+        play sound "w/n066.wav"
+    else:
+        pass
     "\"Same species... different variety.\""
     "She had barely glanced at the flowers here before her eyes swung back to those on the screen."
     "To be perfectly frank, even knowing they were not the same thing, I was still unable to detect any way in which the two varieties differed."
@@ -1511,14 +2076,26 @@ label HAE_honpen2:
     "It was rare for her to allow a conversation to continue even this far."
     scene e danwa_ame
     "\"You seem to know an awful lot. Is this the kind of thing you're into?\""
+    if voc == true:
+        play sound "w/n068.wav"
+    else:
+        pass
     "\"Not really.\""
     "\"What, really? I'd thought you'd need to be, to be able to see the difference...\""
     "Two sets of flowers. One alive but distant, the sea of white blooms within the screen."
     "The other so near, just beyond the girl... but dying in a vase."
     "I made another attempt to revive the conversation."
     "\"What are they, anyway? Orchids, or lilies, or something?\""
+    if voc == true:
+        play sound "w/n067.wav"
+    else:
+        pass
     "\"............\""
     "\"I can't think of anything else white...\""
+    if voc == true:
+        play sound "w/n067.wav"
+    else:
+        pass
     "\"............\""
     scene e b
     "This was hard going. I did my best to feign interest, but it was all I could do to keep talking."
@@ -1526,8 +2103,16 @@ label HAE_honpen2:
     "Either the subject didn't appeal to her after all, or she had realised it didn't appeal to me."
     "I was on the verge of giving up and switching off myself, when..."
     scene e w
+    if voc == true:
+        play sound "w/n069.wav"
+    else:
+        pass
     "\"Narcissi...\""
     "\"What?\""
+    if voc == true:
+        play sound "w/n070.wav"
+    else:
+        pass
     "\"They're narcissi.\""
     scene e chara_0013
     $renpy.pause(0.4)

@@ -167,9 +167,13 @@ label start:
 		"Yes":
 			$voc = true
 			"DISCLAIMER: The voice data may interfere with the performance of the RenPSP Visual Novel engine." "" "Press X to Continue"
+			scene weet cred
+            $renpy.pause(2)
 			jump minititle
 		"No":
 			$voc = false
+			scene weet cred
+            $renpy.pause(2)
 			jump minititle
 label minititle:
     if gameStart == false:
@@ -180,10 +184,9 @@ label minititle:
             "Select version to load."
             menu:
                 "gp32":
-                    $self.state.hide_text = true
                     $gameStart = true
                     $ver = 1
-                    if persistent.gp32ON = true:
+                    if persistent.gp32ON == true:
                         if persistent.gp32Char == 0:
                             menu:
                                 "Prologue":
@@ -333,13 +336,14 @@ label minititle:
                                     $gp32Char = 7
                                     jump minititle
                     else:
+						$gameStart = true
                         $persistent.gp32ON = true
+						$gp32Char = 0
                         jump GP_prologue
                 "Haeleth":
-                    $self.state.hide_text = true
                     $gameStart = true
                     $ver = 2
-                    if persistent.haeON = true:
+                    if persistent.haeON == true:
                         if persistent.haeChar == 0:
                             menu:
                                 "Prologue":
@@ -491,6 +495,7 @@ label minititle:
                     else:
                         $gameStart = true
                         $persistent.haeON = true
+						$haeChar = 0
                         jump HAE_prologue
                 "Agilis":
                     $gameStart = true
@@ -571,8 +576,6 @@ label warn:
     menu:
         "gp32":
             $renpy.block_rollback()
-            scene weet cred
-            $renpy.pause(2)
             $gameStart = true
             $ver = 1
             $persistent.gp32ON = true
@@ -580,9 +583,6 @@ label warn:
             jump GP_prologue
         "Haeleth":
             $renpy.block_rollback()
-            "Sidenote: Voice data has not been added to this version yet." "" "Press X to Continue"
-            scene weet cred
-            $renpy.pause(2)
             $gameStart = true
             $ver = 2
             $persistent.haeON = true
@@ -590,9 +590,7 @@ label warn:
             jump HAE_prologue
         "Agilis":
 			$renpy.block_rollback()
-			scene weet cred
-            $renpy.pause(2)
-            $gameStart = true
+			$gameStart = true
 			$ver = 3
 			scene sys mini_title
             "The Agilis version of [Narcissu] han not been added to the game's script yet. For updates, please check https://github.com/weetabix-su/sakura-alpha or contact [weetabix] via e-mail (vovo27_miranemiko@yahoo.co.jp) or Twitter (@weetabix_su). Thank you." "" "Press X to Quit"

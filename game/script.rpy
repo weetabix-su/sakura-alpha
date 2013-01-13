@@ -598,6 +598,11 @@ label warn:
 #PROLOGUE
 label GP_prologue:
     scene e b
+    if voc == true:
+		play sound "w/n001.wav"
+	else:
+		pass
+    "... on a blindingly bright day ..." "... on that very day of winter ..."
     $renpy.pause(1)
     scene e c001
     $renpy.pause(0.5)
@@ -606,11 +611,7 @@ label GP_prologue:
     scene e c003
     $renpy.pause(0.7)
     scene e c004
-    if voc == true:
-		play sound "w/n001.wav"
-	else:
-		pass
-    "... on a blindingly bright day ..." "... on that very day of winter ..."
+    ""
     play sound "se/rain_1.wav"
     scene e c02
     "- Spring 1996 : Setsumi -"
@@ -797,6 +798,10 @@ label GP_prologue:
     scene e w
     jump minititle
 label HAE_prologue:
+	if voc == true:
+    	play sound "w/n001.wav"
+	else:
+		pass
     scene e b
     $renpy.pause(1)
     scene e c001
@@ -806,10 +811,6 @@ label HAE_prologue:
     scene e c003
     $renpy.pause(0.7)
     scene e c004
-    if voc == true:
-    	play sound "w/n001.wav"
-	else:
-		pass
     ""
     play sound "se/rain_1.wav"
     scene e c02
@@ -2407,189 +2408,74 @@ label GP_honpen3
 	"\"No, not at all.\""
 	"The all-too-expected exchange."
 	"Her eyes looked as faraway as they always had."
-
-!s85
-
-;u‚»‚ê‚¶‚á‚ c@‚¢‚Á‚µ‚å‚És‚­‚©Hv\
-`"Well then ...@
-` shall we go together?"\
-
-dwavestop 0
-
-dwave 0,"w\nv395.ogg"
-
-;u‚¦‚Ácv\
-`"Wha ...?"\
-
-dwavestop 0
-
-;Žè‚ÉŽ‚Á‚½ŽÔ‚ÌƒL[‚ðŒ©‚¹‚È‚ª‚çAŒ¾—t‚ð‘±‚¯‚½B\
-`I continued talking as I showed her the keys in my hand.\
-
-;u‰´‚àc‰Æ‚ÍŒ™‚¾v\
-`"See ... I don't want it to be at home."\
-
-dwavestop 0
-
-dwave 0,"w\n073.ogg"
-
-;ucccccv\
-`"... ... ..."\
-
-dwavestop 0
-
-dwave 0,"w\n074.ogg"
-
-;u‚í‚½‚µ‚Íc‚VŠK‚àŒ™cv\
-`"And I ... don't want it to be on 7F either ..."\
-
-dwavestop 0
-
-;u‚»‚ê‚¶‚á‚ c@‚¢‚Á‚µ‚å‚És‚­‚©Hv\
-`"Well then ...@
-` shall we go together?"\
-
-dwavestop 0
-
-!s100
-
-dwave 0,"w\n044.ogg"
-
-;uc‚¤‚ñv\
-`"... okay."\
-
-dwavestop 0
-
-bg "e\w.jpg",5
-
-!sd
-
-;‚»‚ÌŒ¾—t‚Æ‹¤‚ÉAƒpƒCƒvˆÖŽq‚©‚ç—§‚¿ã‚ª‚é”Þ—B@
-`With that, she stood up from her chair.@
-` 
-
-;‚Ó‚í‚è‚Æ’·‚¢”¯‚ª—h‚êA‰´‚Ì•@æ‚ð‚©‚·‚ß‚½B\
-`Her hair swayed with her, and grazed the tip of my nose.\
-
-;‚»‚µ‚Ä”Þ—‚àA
-;‰½“ú•ª‚©‚Ì–ò‚ðƒRƒ“ƒrƒj‘Ü‚É‹l‚ß‚é‚Æc\
-`And then she, too,
-`stuffed a few days' worth of meds in a bag ...\
-
-;“ñl‚µ‚Ä‚VŠK‚ðŒã‚É‚µ‚½B\
-`And we made to leave 7F together.\
-
-;‰´‚Í‚Â‚Ü‚ç‚È‚¢ƒeƒŒƒr‚ðÁ‚µ‚½B
-;ƒJƒ“‚‚¢Î‚¢º‚ð‚ ‚°‚Ä‚¢‚½Ži‰ïŽÒ‚Í’¾–Ù‚µ‚½B\
-`I switched off that boring TV.
-`The grating laughter of the M.C. was forever obliterated.\
-
-bg "e\b.jpg",5
-
-
-;‚¨ŒÝ‚¢AƒpƒWƒƒƒ}‚Ì‚Ü‚ÜƒGƒŒƒx[ƒ^[‚Éæ‚èž‚ÞB
-;ÅãŠK‚Å‚ ‚éA‚±‚ÌŠK‚©‚ç‚PŠK‚Ö‚Æ~‚è‚éB\
-`Both of us in pajamas clad boarded the elevator.
-`Heading down from this top floor down to 1F.\
-
-;‚PŠK‚É’…‚¢‚Ä‚àA“ü‘Þ‰@‚â‹}Š³“ü‚èŒû‚Å‚Í‚È‚­A
-;‚í‚´‚ÆŠO—ˆ‚Ìo“üŒû‚©‚ç’“ŽÔê‚Ö‚ÆŒü‚©‚Á‚½B\
-`At 1F, we headed not for the E.R. entrance,
-`but for the outpatient clinics entrance.\
-
-bg "e\sora03.jpg",3
-
-dwave 1,"se\kaze3.wav"
-
-;ƒrƒ…ƒE[[A\
-` *woosh*\
-
-;‰®ŠO‚Éo‚½“r’[‚ÉA—â‚½‚¢–ØŒÍ‚ç‚µ‚ªŠç‚ð’@‚­B@
-;áŠQ•¨‚Ì­‚È‚¢’“ŽÔê‚ÍA®XA•—‚ª‹­‚¢‚æ‚¤‚ÉŠ´‚¶‚½B\
-`The cold winter air struck away at our faces.@
-` 
-`All the more strong in a wide-open space like the parking lot.\
-
-;“ñl‚µ‚ÄAƒLƒ‡ƒƒLƒ‡ƒ‚Æ•Ó‚è‚É‹C‚ð”z‚è‚È‚ª‚çA
-;L‚¢•a‰@‚Ì’“ŽÔê‚ð•à‚«‰ñ‚éB\
-`The two of us wandered around the spacious field,
-`looking about ourselves with unease.\
-
-;‚â‚ª‚Äc
-;‚µ‚Î‚ç‚­’T‚µ‚ÄA‚â‚Á‚ÆŒ©‚Â‚¯‚½e•ƒ‚ÌŽÔB\
-`And after a little while ...
-`... we came across my father's car.\
-
-bg "e\byoin_chusyajo.jpg",5
-
-;‹â‚ÌƒN[ƒyB@
-;“à‘•‚É‚Ü‚ÅŽè‚ð“ü‚ê‚½e•ƒŽ©–‚ÌŽÔ‚¾‚Á‚½B\
-`The silver coupe.@
-` 
-`My father's pride and joy, impeccably maintained.\
-
-;‘‘¬‰´‚ÍAƒL[‚ð‚³‚µž‚Þ‚ÆƒhƒA‚ðŠJ‚¯‚éB\
-`I immediately inserted the key and opened the door.\
-
-dwave 1,"se\kati.wav"
-;ƒJƒ`ƒƒA\
-` *ka-click*\
-
-;u‚Ù‚çAæ‚Á‚Ä‚¢‚¢‚¼v\
-`"Go ahead, get in."\
-
-dwavestop 0
-
-dwave 0,"w\n076.ogg"
-
-;u‚¤‚ñA‚í‚©‚Á‚½cv\
-`"Very well ..."\
-
-dwavestop 0
-
-bg "e\b.jpg",3
-
-dwave 1,"se\close.wav"
-
-;ƒoƒ^ƒ“A\
-` *thud*\
-
-;[X‚Æƒhƒ‰ƒCƒo[ƒYƒV[ƒg‚Ég‚ð’¾‚ß‚é‰´B\
-`I sank into the driver's seat.\
-
-;•ŽèÈ‚Ì”Þ—‚ÍA
-;¬•¿‚Ìˆ×‚©•’Ê‚ÉÀ‚Á‚Ä‚à‘O‚ªŒ©‚¦“ï‚¢’ö‚¾‚Á‚½B\
-`She was in the passenger's seat,
-`but she was so short that she'd have a hard time seeing the road.\
-
-bg "e\car_byoin_chusyajo.jpg",3
-
-;ŽŸ‚ÉAŽè‚ÉŽ‚Á‚½ƒL[‚ðƒCƒOƒjƒbƒVƒ‡ƒ“‚Ö‚Æ‘}‚êA
-;‰ñ‚µ‚È‚ª‚çŒy‚­ƒAƒNƒZƒ‹‚ð“¥‚ÞB\
-`I turned the key into ignition,
-`and stepped lightly on the accelerator.\
-
-;‘S‚ÄA‹³KŠ‚ÅK‚Á‚½’Ê‚è‚¾‚Á‚½B\
-`Just as I'd learned during training.\
-
-dwave 1,"se\engine_start.wav"
-
-;ƒLƒ…ƒ‹ƒLƒ…ƒ‹A
-;ƒEƒHƒ“ƒuƒIƒ“cc\
-` *whirr*whirr*
-` *vroom*vroom* ...\
-
-;‚½‚¿‚Ü‚¿AŽÔ“à‚É‹¿‚­Œy‚¢ƒGƒ“ƒWƒ“‰¹B\
-`Reassuring engine noises filtered into the cabin.\
-
-;Œã‚ÍƒTƒCƒhƒuƒŒ[ƒL‚ðŠO‚µ‚ÄAƒNƒ‰ƒbƒ`‚ð—£‚·‚¾‚¯B\
-`I released the handbrake and then applied the clutch.\
-
-;c‚±‚ê‚ÅA‚Ç‚±‚Ö‚Å‚às‚¯‚½Bs‚¯‚é”¤‚¾‚Á‚½B\
-`... now we could go anywhere.  That was our plan.\
-
-;u‚¶‚á‚ As‚­‚¼cv\
-`"All right, let's go ..."\
+	"\"Well then ..."
+	"\"Well then ... shall we go together?\""
+	if voc == true:
+		play sound "w/nv395.wav"
+	else:
+		pass
+	"\"Wha ...?\""
+	"I continued talking as I showed her the keys in my hand."
+	"\"See ... I don't want it to be at home.\""
+	if voc == true:
+		play sound "w/n073.wav"
+	else:
+		pass
+	"\"... ... ...\""
+	if voc == true:
+		play sound "w/n074.wav"
+	else:
+		pass
+	"\"And I ... don't want it to be on 7F either ...\""
+	"\"Well then ..."
+	"\"Well then ... shall we go together?\""
+	if voc == true:
+		play sound "w/n044.wav"
+	else:
+		pass
+	"\"... okay.\""
+	scene e w
+	"With that, she stood up from her chair."
+	"With that, she stood up from her chair." "Her hair swayed with her, and grazed the tip of my nose."
+	"And then she, too," "stuffed a few days' worth of meds in a bag ..."
+	"And we made to leave 7F together."
+	"I switched off that boring TV." "The grating laughter of the M.C. was forever obliterated."
+	scene e b
+	"Both of us in pajamas clad boarded the elevator." "Heading down from this top floor down to 1F."
+	"At 1F, we headed not for the E.R. entrance," "but for the outpatient clinics entrance."
+	scene  e sora03
+	play sound "se/kaze3.wav"
+	"*woosh*"
+	"The cold winter air struck away at our faces."
+	"The cold winter air struck away at our faces." "" "All the more strong in a wide-open space like the parking lot."
+	"The two of us wandered around the spacious field," "looking about ourselves with unease."
+	"And after a little while ..." "... we came across my father's car."
+	scene e byoin_chusyajo
+	"The silver coupe."
+	"The silver coupe." "" "My father's pride and joy, impeccably maintained."
+	"I immediately inserted the key and opened the door."
+	play sound "se/kati.wav"
+	"*ka-click*"
+	"\"Go ahead, get in.\""
+	if voc == true:
+		play sound "w/n076.wav"
+	else:
+		pass
+	"\"Very well ...\""
+	scene e b
+	play sound "se/close.wav"
+	"*thud*"
+	"I sank into the driver's seat."
+	"She was in the passenger's seat" "but she was so short that she'd have a hard time seeing the road."
+	scene e car_byoin_chusyajo
+	"I turned the key into ignition," "and stepped lightly on the accelerator."
+	"Just as I'd learned during training."
+	play sound "se/engine_start.wav"
+	"*whirr*whirr*" "*vroom*vroom* ..."
+	"Reassuring engine noises filtered into the cabin."
+	"I released the handbrake and then applied the clutch."
+	"... now we could go anywhere. That was our plan."
+	"\"All right, let's go ...\""
 
 dwavestop 0
 

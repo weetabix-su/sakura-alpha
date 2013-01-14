@@ -1,4 +1,3 @@
-#WEETABIX INITIALS AND MENU-ISH DATA
 init:    
     image weet cred = "weet/portcred.jpg"
     image e amazora02 = "e/amazora02.jpg"
@@ -162,18 +161,18 @@ init:
 label start:
     $gameStart = false
     $ver = 0
-    "Note: [Narcissu] contains voice data." "" "Turn on voice data?"
-    menu:
+	"Note: [Narcissu] contains voice data." "" "Turn on voice data?"
+	menu:
 		"Yes":
 			$voc = true
 			"DISCLAIMER: The voice data may interfere with the performance of the RenPSP Visual Novel engine." "" "Press X to Continue"
 			scene weet cred
-            $renpy.pause(2)
+			$renpy.pause(2)
 			jump minititle
 		"No":
 			$voc = false
 			scene weet cred
-            $renpy.pause(2)
+			$renpy.pause(2)
 			jump minititle
 label minititle:
     if gameStart == false:

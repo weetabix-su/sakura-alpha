@@ -2129,7 +2129,7 @@ label HAE_honpen2:
     $haeChar = haeChar + 1
     jump minititle
 #CHAPTER 2
-label GP_honpen3
+label GP_honpen3:
     scene tui2 c0432
     ""
     scene e b
